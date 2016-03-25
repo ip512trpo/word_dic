@@ -7,23 +7,21 @@
 
 using namespace std;
 
-int main()
+int word_dic()
 {
 	
-      SetConsoleCP(1251);
+    SetConsoleCP(1251);
    
     const int len = 30, strings = 1; //Описываем всю хурму
 	const char ch = '\n';
 	char word[20];
 	char input[20];
 	char mass[len][strings];
-	cout << "Please, enter the word in the Russian language..." << endl <<"-->"; // Приветственный текст
-    gets(input); // считываем строку с клавиатуры 
-  
+      gets(input); // считываем строку с клавиатуры 
     int len2 = strlen(input); 
 	int i, k=0, q=0, m=0;
        
-    	ifstream fs("word_rus.txt", ios::in); // открываем файл .txt со словарем
+    ifstream fs("word_rus.txt"); // открываем файл .txt со словарем
 	
 	if(!fs) return 1; //Если ошибка открытия файла, то завершаем программу
 	while ((q==0)&&(m!=34010)){  //условие выхода из цикла и выход при окончании поиска
@@ -33,22 +31,27 @@ int main()
     
 
 	for (i=0;i<len2;i++){
-        
-  if (input[i]!=word[i])   //сравниваем по символам наши слова
-  {
-    k++;
-   break;   //если условаие сработало, то все прервываем и начинаем заново
-   }
-    }
-   if (k==0){q++;        //если наше условаие ни разу не сработало (k=0), то значит слово нашлось!
-     cout << "Word found! That's right!\n";}}  //выводим сообщение, что все верно
+     if (input[i]!=word[i]){   //сравниваем по символам наши слова
+           k++;
+             break;   //если условаие сработало, то все прервываем и начинаем заново
+                    }
+      }
+    if (k==0){                    //если наше условаие ни разу не сработало (k=0), то значит слово нашлось!
+           q++;       
+           cout << "Word found! That's right!\n"; //выводим сообщение, что все верно
+           }
+    }  
 	fs.close(); //Закрываем файл
      
 	if (m>=34010)  //если словарь кончился, а мы ничего не нашли, то выводим ошибку.
-	 cout << "Sorry, not found!";  
+	     cout << "Sorry, not found!";  
 	
 	getch();
 
 }
 
+main(){
+    cout << "Please, enter the word in the Russian language..." << endl <<"-->"; // Приветственный текст
+    word_dic(); 
+}
 
